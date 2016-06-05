@@ -38,20 +38,18 @@ RTE_TARGET ?= x86_64-native-linuxapp-gcc
 
 include $(RTE_SDK)/mk/rte.vars.mk
 
-#CONFIG_RTE_BUILD_SHARED_LIB=y
 # binary name
-#LIB = libhelloworld.so
-SHARED = libhelloworld.so
+APP = helloworld
 
 # all source are stored in SRCS-y
-SRCS-y := helloworld.c
+SRCS-y := main.c
 
-RTE_BUILD_SHARED_LIB=y
-CFLAGS += -fPIC
-#LDLIBS += -lrte_eal
+INCDIR += -I/home/developer/lua/lua-5.1.5/include
+#LDIR += -L/home/developer/lua/lua-5.1.5/lib
+#LDLIBS += $(LDIR) -lm -llua
+LDLIBS += $(LDIR) -lm -lluajit-5.1
 CFLAGS += -O3
-CFLAGS += $(WERROR_FLAGS)
-#CFLAGS += $(WERROR_FLAGS) -L$(LDLIBS)
+#CFLAGS += $(WERROR_FLAGS) $(INCDIR)
+CFLAGS += $(INCDIR)
 
-#include $(RTE_SDK)/mk/rte.extlib.mk
-include $(RTE_SDK)/mk/rte.extshared.mk
+include $(RTE_SDK)/mk/rte.extapp.mk

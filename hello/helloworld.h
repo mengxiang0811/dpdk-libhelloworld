@@ -2,6 +2,6 @@
 #define HELLOWORLD_H
 
 int
-helloworld(int argc, char **argv);
+helloworld_func(int argc);
 
 #endif

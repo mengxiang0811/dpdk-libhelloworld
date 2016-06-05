@@ -57,15 +57,24 @@ lcore_hello(__attribute__((unused)) void *arg)
 }
 
 int
-helloworld(int argc, char **argv)
+helloworld_func(int argc)
 {
 	int ret;
 	unsigned lcore_id;
 
-	ret = rte_eal_init(argc, argv);
+	char **param;
+	param = (char **)malloc(sizeof(char *) * 1);
+	param[0] = (char *)malloc(sizeof(char) * 7);
+
+	memcpy(param[0], "./test", 6);
+	
+	printf("In helloworld_func()!\n");
+	printf("%s\n", param[0]);
+	ret = rte_eal_init(argc, param);
 	if (ret < 0)
 		rte_panic("Cannot init EAL\n");
 
+	printf("In helloworld_func() - 1!\n");
 	/* call lcore_hello() on every slave lcore */
 	RTE_LCORE_FOREACH_SLAVE(lcore_id) {
 		rte_eal_remote_launch(lcore_hello, NULL, lcore_id);

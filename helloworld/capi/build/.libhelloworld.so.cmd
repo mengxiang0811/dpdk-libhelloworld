@@ -1,0 +1,1 @@
+cmd_libhelloworld.so = gcc -Wl,--no-as-needed -Wl,-export-dynamic -L/home/developer/dpdk/examples/dpdk-libhelloworld/helloworld/capi/build/lib -L/home/developer/dpdk/x86_64-native-linuxapp-gcc/lib   -shared -o libhelloworld.so helloworld.o -Wl,-lrte_eal 
